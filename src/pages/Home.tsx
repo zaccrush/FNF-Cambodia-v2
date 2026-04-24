@@ -49,7 +49,7 @@ export default function Home() {
   return (
     <>
       {/* HERO SECTION - HIGH OCTANE */}
-      <section className="relative pt-32 pb-12 sm:pt-48 sm:pb-16 min-h-[100vh] flex flex-col justify-end overflow-hidden bg-brand-dark">
+      <section className="relative pt-40 pb-12 sm:pt-56 sm:pb-16 min-h-[100vh] flex flex-col justify-start overflow-hidden bg-brand-dark">
         {/* Dynamic Background Image */}
         <motion.div 
           initial={{ opacity: 0, scale: 1.05 }}
@@ -65,8 +65,8 @@ export default function Home() {
             decoding="sync"
           />
           {/* Radial gradient and vignette for text legibility */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-brand-dark/30 to-transparent z-10" />
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/70 via-transparent to-transparent z-10 w-full" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-brand-dark/50 to-brand-dark/30 z-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/90 via-brand-dark/40 to-transparent z-10 w-full" />
         </motion.div>
 
         {/* Diagonal Marquee Ticker */}
@@ -454,15 +454,23 @@ export default function Home() {
         </Link>
       </div>
 
-      {/* Manifesto Button - Positioned on top of Hero */}
+      {/* Manifesto Button - Positioned beneath header */}
       <motion.button
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1, duration: 0.8 }}
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 1, duration: 0.8, type: "spring" }}
         onClick={scrollToManifesto}
-        className="fixed right-6 bottom-24 sm:right-10 sm:bottom-32 z-[100] flex items-center gap-3 bg-brand-gold text-black px-6 py-4 rounded-full font-bold uppercase tracking-widest text-[10px] shadow-[0_0_50px_rgba(212,175,55,0.4)] hover:bg-white hover:scale-105 active:scale-95 transition-all group border border-brand-gold/20"
+        className="fixed right-6 top-24 sm:right-10 sm:top-28 z-[100] flex items-center gap-3 bg-[#10b981] text-white px-6 py-4 rounded-full font-bold uppercase tracking-widest text-[11px] shadow-[0_0_40px_rgba(16,185,129,0.5)] hover:bg-[#059669] hover:scale-105 active:scale-95 transition-all group border border-white/20"
       >
-        <MessageSquareQuote size={18} className="group-hover:rotate-12 transition-transform" />
+        <svg 
+          viewBox="0 0 24 24" 
+          width="20" 
+          height="20" 
+          fill="currentColor" 
+          className="group-hover:rotate-12 transition-transform duration-300"
+        >
+          <path d="M12 1L14.8 8.4L22 7.9L17.6 13.5L19.8 20.6L12 17.5L4.2 20.6L6.4 13.5L2 7.9L9.2 8.4L12 1Z" />
+        </svg>
         <span className="hidden sm:inline">{language === 'EN' ? 'Message to Fighters' : 'សារជូនកីឡាករ'}</span>
       </motion.button>
     </>

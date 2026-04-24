@@ -2,7 +2,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Shield, Target, Award, Users, MapPin, Landmark, ChevronRight, Plus, Minus } from 'lucide-react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 export default function About() {
   const { lang } = useParams();
@@ -185,7 +185,22 @@ export default function About() {
           <div className="space-y-4">
             <AccordionItem 
               question="Our Founding Mission" 
-              answer="FNF was established to provide a world-class platform for Khmer athletes to showcase their ancestral skills to a global audience. Our mission is to professionalize Kun Khmer while honoring its deep historical roots, ensuring that every elbow thrown and every kick landed resonates with the pride of a nation." 
+              answer={
+                <div className="space-y-4 whitespace-pre-line">
+                  <p>
+                    FNF was built to shatter the status quo of combat sports. We are a promotion engineered from the ground up to empower the athletes who bleed in the ring, driven by three uncompromising pillars:
+                  </p>
+                  <p>
+                    <strong className="text-brand-gold">Pioneering the Fighter-First Economy:</strong> We are introducing a revolutionary financial model to the world, setting an entirely new standard for MMA promotions and events. At FNF, the athletes are the franchise. We are dismantling the old system to ensure that the fighters finally reap the true, equitable rewards of their sacrifice and skill.
+                  </p>
+                  <p>
+                    <strong className="text-brand-gold">Elevating Kun Khmer Globally:</strong> We are taking the ancient, devastating art of Kun Khmer and thrusting it onto the international stage. Every strike thrown is a testament to a rich historical lineage, and we are here to command the global respect this ancestral martial art has always deserved.
+                  </p>
+                  <p>
+                    <strong className="text-brand-gold">Broadcasting Raw, Cinematic Storytelling:</strong> The battle in the ring is only half the narrative. FNF serves as an unfiltered platform dedicated to showcasing the raw, gritty truths of our warriors. Through premium, high-quality production—spanning immersive podcasts, intimate deep-dive interviews, and electrifying event livestreams—we broadcast the scars, the struggles, and the profoundly human journeys behind every fighter.
+                  </p>
+                </div>
+              } 
             />
             <AccordionItem 
               question="The FNF Legacy & History" 
@@ -266,7 +281,7 @@ export default function About() {
   );
 }
 
-function AccordionItem({ question, answer }: { question: string, answer: string }) {
+function AccordionItem({ question, answer }: { question: string, answer: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
