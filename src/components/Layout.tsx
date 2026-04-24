@@ -190,23 +190,23 @@ export default function Layout() {
       </nav>
 
       {/* BOTTOM NAV (MOBILE ONLY) */}
-      <div className="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] w-[90%] max-w-sm">
-        <div className="bg-brand-dark/80 backdrop-blur-2xl rounded-[32px] p-2 flex items-center justify-between shadow-[0_32px_64px_rgba(0,0,0,0.5)]">
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-[60] bg-brand-dark/80 backdrop-blur-3xl border-t border-white/5 pb-safe">
+        <div className="max-w-md mx-auto px-6 py-3 flex items-center justify-between">
           {bottomNavLinks.map((link) => {
             const isActive = pathname === link.path;
             return (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`relative flex flex-col items-center justify-center w-16 h-16 rounded-2xl transition-all duration-300 px-2 ${
-                  isActive ? 'text-brand-gold bg-white/5' : 'text-white hover:text-brand-gold'
+                className={`relative flex flex-col items-center justify-center py-2 transition-all duration-300 min-w-[64px] ${
+                  isActive ? 'text-brand-gold scale-110' : 'text-white/60 hover:text-white'
                 }`}
               >
-                <link.icon size={22} className={isActive ? 'animate-pulse' : ''} />
-                <span className="text-[8px] font-black uppercase tracking-widest mt-1.5">{link.label}</span>
+                <link.icon size={20} />
+                <span className="text-[9px] font-black uppercase tracking-widest mt-1.5">{link.label}</span>
                 {isActive && (
                   <motion.div
-                    layoutId="bottom-nav-indicator"
+                    layoutId="bottom-nav-active-dot"
                     className="absolute -bottom-1 w-1 h-1 bg-brand-gold rounded-full shadow-[0_0_10px_rgba(255,212,63,1)]"
                   />
                 )}
@@ -215,9 +215,11 @@ export default function Layout() {
           })}
           <Link
             to={`/${urlLang}/register`}
-            className="w-16 h-16 bg-brand-gold text-black rounded-2xl flex items-center justify-center shadow-lg shadow-brand-gold/20 active:scale-90 transition-transform"
+            className={`flex flex-col items-center justify-center p-2 rounded-2xl transition-all duration-300 ${
+              pathname.includes('register') ? 'bg-white text-black scale-105' : 'bg-brand-gold text-black shadow-lg shadow-brand-gold/20'
+            }`}
           >
-            <UserPlus size={24} />
+            <UserPlus size={22} strokeWidth={3} />
           </Link>
         </div>
       </div>
@@ -241,8 +243,8 @@ export default function Layout() {
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ duration: 0.5, type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 z-40 w-[85%] max-w-sm h-screen bg-brand-dark/95 backdrop-blur-xl pt-28 px-6 flex flex-col overflow-y-auto pb-32 shadow-2xl lg:hidden pointer-events-auto"
+              transition={{ duration: 0.6, type: "spring", damping: 30, stiffness: 120 }}
+              className="fixed top-0 right-0 z-40 w-full xs:w-[85%] max-w-sm h-screen bg-brand-dark/95 backdrop-blur-3xl pt-28 px-6 flex flex-col overflow-y-auto pb-40 shadow-[-20px_0_60px_rgba(0,0,0,0.5)] lg:hidden pointer-events-auto"
             >
               <div className="flex flex-col gap-2 text-2xl sm:text-3xl font-display font-medium mb-8">
                 {navLinks.map((link, i) => {
@@ -250,15 +252,15 @@ export default function Layout() {
                     return (
                       <motion.div
                         key={link.label}
-                        initial={{ opacity: 0, x: 20 }}
+                        initial={{ opacity: 0, x: 50 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: i * 0.05 + 0.1, type: "spring", stiffness: 300, damping: 24 }}
+                        transition={{ delay: i * 0.05 + 0.2, type: "spring", stiffness: 100, damping: 20 }}
                         className="mb-4"
                       >
                         <span className="block text-brand-gold uppercase tracking-[0.2em] text-[10px] font-black mb-2 opacity-100 px-4">
                           {link.label}
                         </span>
-                        <div className="flex flex-col gap-1 ml-2 pl-2 border-l border-white/10">
+                        <div className="flex flex-col gap-1 ml-2 pl-2 border-l border-white/5">
                           {link.submenu.map((sub, j) => {
                             const fullSubPath = `/${urlLang}${sub.path}`;
                             const isSubActive = pathname === fullSubPath;
@@ -267,10 +269,15 @@ export default function Layout() {
                                 key={sub.path}
                                 to={fullSubPath} 
                                 className={`w-full block py-3 px-4 rounded-xl transition-all duration-300 uppercase tracking-tight flex items-center gap-3 ${
-                                  isSubActive ? 'text-brand-gold bg-white/5 translate-x-1' : 'text-white hover:text-brand-gold hover:bg-white/5'
+                                  isSubActive ? 'text-brand-gold bg-white/5 translate-x-3' : 'text-white/60 hover:text-white hover:bg-white/5'
                                 }`}
                               >
-                                {isSubActive && <div className="w-1.5 h-1.5 rounded-full bg-brand-gold shadow-[0_0_10px_rgba(255,212,63,0.5)] shrink-0" />}
+                                {isSubActive && (
+                                  <motion.div 
+                                    layoutId="mobile-sub-dot"
+                                    className="w-1.5 h-1.5 rounded-full bg-brand-gold shadow-[0_0_10px_rgba(255,212,63,0.8)] shrink-0" 
+                                  />
+                                )}
                                 {sub.label}
                               </Link>
                             );
@@ -285,25 +292,25 @@ export default function Layout() {
                   return (
                     <motion.div
                       key={link.path}
-                      initial={{ opacity: 0, x: 20 }}
+                      initial={{ opacity: 0, x: 50 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.05 + 0.1, type: "spring", stiffness: 300, damping: 24 }}
+                      transition={{ delay: i * 0.05 + 0.2, type: "spring", stiffness: 100, damping: 20 }}
                     >
                       <Link 
                         to={fullPath} 
                         className={`relative w-full block py-4 px-4 rounded-xl transition-all duration-300 uppercase tracking-tighter group ${
-                          isActive ? 'text-white bg-white/5' : 'text-white hover:text-brand-gold hover:bg-white/5'
+                          isActive ? 'text-white bg-white/5 translate-x-2' : 'text-white/60 hover:text-white hover:bg-white/5'
                         }`}
                       >
                         <div className="flex items-center justify-between">
-                          <span>{link.label}</span>
+                          <span className={`${isActive ? 'text-brand-gold font-bold' : ''}`}>{link.label}</span>
                           {isActive && (
                             <motion.div 
                               layoutId="mobile-active-indicator"
-                              className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-brand-gold rounded-r-full shadow-[0_0_20px_rgba(255,212,63,0.3)]" 
+                              className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-8 bg-brand-gold rounded-r-full shadow-[0_0_20px_rgba(255,212,63,0.5)]" 
                             />
                           )}
-                          <ChevronRight size={20} className={`opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all ${isActive ? 'text-brand-gold opacity-100' : ''}`} />
+                          <ChevronRight size={20} className={`opacity-20 group-hover:opacity-100 group-hover:translate-x-1 transition-all ${isActive ? 'text-brand-gold opacity-100' : ''}`} />
                         </div>
                       </Link>
                     </motion.div>
@@ -311,20 +318,20 @@ export default function Layout() {
                 })}
                 
                 <motion.div 
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: navLinks.length * 0.05 + 0.1, type: "spring", stiffness: 300, damping: 24 }}
-                  className="h-[1px] bg-white/10 my-2 mx-4" 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: navLinks.length * 0.05 + 0.3 }}
+                  className="h-[1px] bg-white/5 my-4 mx-4" 
                 />
                 
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: (navLinks.length + 2) * 0.05 + 0.1, type: "spring", stiffness: 300, damping: 24 }}
+                  transition={{ delay: (navLinks.length + 2) * 0.05 + 0.4, type: "spring", stiffness: 100, damping: 20 }}
                   className="mt-6 mx-2"
                 >
-                  <Link to={`/${urlLang}/register`} className="bg-brand-gold text-black w-full py-4 text-center font-bold rounded-2xl flex items-center justify-center gap-3 text-base sm:text-lg uppercase tracking-widest shadow-[0_20px_40px_rgba(212,175,55,0.15)] hover:bg-white transition-all transform hover:-translate-y-1">
-                    <UserPlus size={20} />
+                  <Link to={`/${urlLang}/register`} className="bg-brand-gold text-black w-full py-5 text-center font-bold rounded-2xl flex items-center justify-center gap-3 text-base sm:text-lg uppercase tracking-widest shadow-[0_20px_40px_rgba(212,175,55,0.25)] hover:bg-white hover:scale-[1.02] active:scale-[0.98] transition-all">
+                    <UserPlus size={20} strokeWidth={2.5} />
                     {t.nav.register}
                   </Link>
                 </motion.div>
@@ -335,7 +342,7 @@ export default function Layout() {
       </AnimatePresence>
 
       {/* MAIN VIEW */}
-      <main className="flex-1 w-full">
+      <main className="flex-1 w-full pb-28 lg:pb-0">
         {/* Pass down the derived language representation down to children like Home */}
         <Outlet context={{ language: safeLang }} />
       </main>
