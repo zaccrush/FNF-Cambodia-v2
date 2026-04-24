@@ -4,9 +4,9 @@ export type Language = 'EN' | 'KH';
 export const translations = {
   EN: {
     nav: {
-      fighters: "Fighters",
-      kunKhmerFighters: "Kun Khmer Fighters",
-      mmaFighters: "MMA Fighters",
+      fighters: "FIGHTERS",
+      kunKhmerFighters: "KUN KHMER",
+      mmaFighters: "MMA",
       gyms: "Gyms",
       partners: "Partners",
       media: "Media",
@@ -171,8 +171,8 @@ export const translations = {
   KH: {
     nav: {
       fighters: "កីឡាករ",
-      kunKhmerFighters: "កីឡាករគុនខ្មែរ",
-      mmaFighters: "កីឡាករ MMA",
+      kunKhmerFighters: "គុនខ្មែរ",
+      mmaFighters: "MMA",
       gyms: "ក្លឹបហ្វឹកហាត់",
       partners: "ដៃគូសហការ",
       media: "ប្រព័ន្ធផ្សព្វផ្សាយ",
