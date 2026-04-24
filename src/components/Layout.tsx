@@ -1,12 +1,20 @@
 import React from 'react';
+import Logo from '../assets/logo.png';
 
-import logo from '../assets/FNF-LOGO-White.png';
-
-const Layout = () => {
+const Layout = ({ children }) => {
     return (
         <div>
-            <img src={logo} alt="FNF Logo" />
-            {/* Other layout content */}
+            <header>
+                <nav>
+                    <img src={Logo} alt="Logo" />
+                    {/* Other Navbar items here */}
+                </nav>
+            </header>
+            <main>{children}</main>
+            <footer>
+                <img src={Logo} alt="Logo" />
+                {/* Other Footer items here */}
+            </footer>
         </div>
     );
 };
