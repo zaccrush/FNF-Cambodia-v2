@@ -12,10 +12,50 @@ export default function Register() {
   const [role, setRole] = useState<Role | null>(null);
   const [step, setStep] = useState(1);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    gym: '',
+    record: '',
+    coachName: '',
+    gymName: '',
+    activeFighters: '',
+    phone: '',
+    discipline: 'Kun Khmer',
+    facebook: '',
+    instagram: '',
+    telegram: ''
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    setIsLoading(true);
+    
+    try {
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ role, formData }),
+      });
+      
+      if (response.ok) {
+        setIsSubmitted(true);
+      } else {
+        console.error('Registration failed');
+        alert('Registration failed. Please try again later.');
+      }
+    } catch (error) {
+      console.error('Error submitting registration:', error);
+      alert('Error connecting to the server. Please check your connection.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const RoleCard = ({ type, title, subtitle, icon: Icon }: { type: Role, title: string, subtitle: string, icon: any }) => (
@@ -186,14 +226,14 @@ export default function Register() {
                       </label>
                       <div className="relative group">
                         <User className="absolute left-4 top-1/2 -translate-y-1/2 text-[#555] group-focus-within:text-brand-gold transition-colors" size={18} />
-                        <input required type="text" className="w-full bg-brand-dark border border-white/5 rounded-2xl py-4 pl-12 pr-6 text-white outline-none focus:border-brand-gold/40 transition-all font-medium" placeholder="First & Last Name" />
+                        <input required name="name" value={formData.name || formData.gymName || formData.coachName} onChange={handleInputChange} type="text" className="w-full bg-brand-dark border border-white/5 rounded-2xl py-4 pl-12 pr-6 text-white outline-none focus:border-brand-gold/40 transition-all font-medium" placeholder="First & Last Name" />
                       </div>
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-bold text-[#555] uppercase tracking-widest ml-1">Email Address</label>
                       <div className="relative group">
                         <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-[#555] group-focus-within:text-brand-gold transition-colors" size={18} />
-                        <input required type="email" className="w-full bg-brand-dark border border-white/5 rounded-2xl py-4 pl-12 pr-6 text-white outline-none focus:border-brand-gold/40 transition-all font-medium" placeholder="your@email.com" />
+                        <input required name="email" value={formData.email} onChange={handleInputChange} type="email" className="w-full bg-brand-dark border border-white/5 rounded-2xl py-4 pl-12 pr-6 text-white outline-none focus:border-brand-gold/40 transition-all font-medium" placeholder="your@email.com" />
                       </div>
                     </div>
                     
@@ -203,14 +243,14 @@ export default function Register() {
                           <label className="text-[10px] font-bold text-[#555] uppercase tracking-widest ml-1">Current Gym / Team</label>
                           <div className="relative group">
                             <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-[#555] group-focus-within:text-brand-gold transition-colors" size={18} />
-                            <input required type="text" className="w-full bg-brand-dark border border-white/5 rounded-2xl py-4 pl-12 pr-6 text-white outline-none focus:border-brand-gold/40 transition-all font-medium" placeholder="Gym Name" />
+                            <input required name="gym" value={formData.gym} onChange={handleInputChange} type="text" className="w-full bg-brand-dark border border-white/5 rounded-2xl py-4 pl-12 pr-6 text-white outline-none focus:border-brand-gold/40 transition-all font-medium" placeholder="Gym Name" />
                           </div>
                         </div>
                         <div className="space-y-2">
                           <label className="text-[10px] font-bold text-[#555] uppercase tracking-widest ml-1">Fight Record (W-L-D)</label>
                           <div className="relative group">
                             <Trophy className="absolute left-4 top-1/2 -translate-y-1/2 text-[#555] group-focus-within:text-brand-gold transition-colors" size={18} />
-                            <input required type="text" className="w-full bg-brand-dark border border-white/5 rounded-2xl py-4 pl-12 pr-6 text-white outline-none focus:border-brand-gold/40 transition-all font-medium" placeholder="E.g. 15-2-0" />
+                            <input required name="record" value={formData.record} onChange={handleInputChange} type="text" className="w-full bg-brand-dark border border-white/5 rounded-2xl py-4 pl-12 pr-6 text-white outline-none focus:border-brand-gold/40 transition-all font-medium" placeholder="E.g. 15-2-0" />
                           </div>
                         </div>
                       </>
@@ -220,14 +260,14 @@ export default function Register() {
                           <label className="text-[10px] font-bold text-[#555] uppercase tracking-widest ml-1">Gym Name</label>
                           <div className="relative group">
                             <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-[#555] group-focus-within:text-brand-gold transition-colors" size={18} />
-                            <input required type="text" className="w-full bg-brand-dark border border-white/5 rounded-2xl py-4 pl-12 pr-6 text-white outline-none focus:border-brand-gold/40 transition-all font-medium" placeholder="Official Gym Name" />
+                            <input required name="gymName" value={formData.gymName} onChange={handleInputChange} type="text" className="w-full bg-brand-dark border border-white/5 rounded-2xl py-4 pl-12 pr-6 text-white outline-none focus:border-brand-gold/40 transition-all font-medium" placeholder="Official Gym Name" />
                           </div>
                         </div>
                         <div className="space-y-2">
                           <label className="text-[10px] font-bold text-[#555] uppercase tracking-widest ml-1">Number of Active Fighters</label>
                           <div className="relative group">
                             <Users className="absolute left-4 top-1/2 -translate-y-1/2 text-[#555] group-focus-within:text-brand-gold transition-colors" size={18} />
-                            <input required type="number" className="w-full bg-brand-dark border border-white/5 rounded-2xl py-4 pl-12 pr-6 text-white outline-none focus:border-brand-gold/40 transition-all font-medium" placeholder="E.g. 12" />
+                            <input required name="activeFighters" value={formData.activeFighters} onChange={handleInputChange} type="number" className="w-full bg-brand-dark border border-white/5 rounded-2xl py-4 pl-12 pr-6 text-white outline-none focus:border-brand-gold/40 transition-all font-medium" placeholder="E.g. 12" />
                           </div>
                         </div>
                       </>
@@ -237,12 +277,12 @@ export default function Register() {
                           <label className="text-[10px] font-bold text-[#555] uppercase tracking-widest ml-1">Phone Number</label>
                           <div className="relative group">
                             <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-[#555] group-focus-within:text-brand-gold transition-colors" size={18} />
-                            <input required type="tel" className="w-full bg-brand-dark border border-white/5 rounded-2xl py-4 pl-12 pr-6 text-white outline-none focus:border-brand-gold/40 transition-all font-medium" placeholder="+855 ..." />
+                            <input required name="phone" value={formData.phone} onChange={handleInputChange} type="tel" className="w-full bg-brand-dark border border-white/5 rounded-2xl py-4 pl-12 pr-6 text-white outline-none focus:border-brand-gold/40 transition-all font-medium" placeholder="+855 ..." />
                           </div>
                         </div>
                         <div className="space-y-2">
                           <label className="text-[10px] font-bold text-[#555] uppercase tracking-widest ml-1">Favorite Discipline</label>
-                          <select className="w-full bg-brand-dark border border-white/5 rounded-2xl py-4 px-6 text-white outline-none focus:border-brand-gold/40 transition-all font-medium appearance-none">
+                          <select name="discipline" value={formData.discipline} onChange={handleInputChange} className="w-full bg-brand-dark border border-white/5 rounded-2xl py-4 px-6 text-white outline-none focus:border-brand-gold/40 transition-all font-medium appearance-none">
                             <option>Kun Khmer</option>
                             <option>MMA</option>
                             <option>Both</option>
@@ -257,15 +297,15 @@ export default function Register() {
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                       <div className="relative group">
                         <Facebook className="absolute left-4 top-1/2 -translate-y-1/2 text-[#555] group-focus-within:text-brand-gold transition-colors" size={18} />
-                        <input type="url" className="w-full bg-brand-dark border border-white/5 rounded-2xl py-4 pl-12 pr-6 text-white outline-none focus:border-brand-gold/40 transition-all font-medium text-sm" placeholder="Facebook URL" />
+                        <input name="facebook" value={formData.facebook} onChange={handleInputChange} type="url" className="w-full bg-brand-dark border border-white/5 rounded-2xl py-4 pl-12 pr-6 text-white outline-none focus:border-brand-gold/40 transition-all font-medium text-sm" placeholder="Facebook URL" />
                       </div>
                       <div className="relative group">
                         <Instagram className="absolute left-4 top-1/2 -translate-y-1/2 text-[#555] group-focus-within:text-brand-gold transition-colors" size={18} />
-                        <input type="url" className="w-full bg-brand-dark border border-white/5 rounded-2xl py-4 pl-12 pr-6 text-white outline-none focus:border-brand-gold/40 transition-all font-medium text-sm" placeholder="Instagram URL" />
+                        <input name="instagram" value={formData.instagram} onChange={handleInputChange} type="url" className="w-full bg-brand-dark border border-white/5 rounded-2xl py-4 pl-12 pr-6 text-white outline-none focus:border-brand-gold/40 transition-all font-medium text-sm" placeholder="Instagram URL" />
                       </div>
                       <div className="relative group">
                         <Send className="absolute left-4 top-1/2 -translate-y-1/2 text-[#555] group-focus-within:text-brand-gold transition-colors" size={18} />
-                        <input type="text" className="w-full bg-brand-dark border border-white/5 rounded-2xl py-4 pl-12 pr-6 text-white outline-none focus:border-brand-gold/40 transition-all font-medium text-sm" placeholder="Telegram @handle" />
+                        <input name="telegram" value={formData.telegram} onChange={handleInputChange} type="text" className="w-full bg-brand-dark border border-white/5 rounded-2xl py-4 pl-12 pr-6 text-white outline-none focus:border-brand-gold/40 transition-all font-medium text-sm" placeholder="Telegram @handle" />
                       </div>
                     </div>
                   </div>
@@ -273,9 +313,15 @@ export default function Register() {
                   <div className="pt-6">
                     <button 
                       type="submit"
-                      className="w-full bg-brand-gold text-black py-5 rounded-2xl font-black uppercase tracking-[0.2em] hover:bg-white transition-all shadow-[0_0_40px_rgba(212,175,55,0.2)] hover:shadow-[0_0_60px_rgba(255,255,255,0.3)] active:scale-95"
+                      disabled={isLoading}
+                      className={`w-full bg-brand-gold text-black py-5 rounded-2xl font-black uppercase tracking-[0.2em] transition-all shadow-[0_0_40px_rgba(212,175,55,0.2)] hover:shadow-[0_0_60px_rgba(255,255,255,0.3)] active:scale-95 flex items-center justify-center gap-3 ${isLoading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-white'}`}
                     >
-                      Complete Registration
+                      {isLoading ? (
+                        <>
+                          <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin" />
+                          Processing...
+                        </>
+                      ) : 'Complete Registration'}
                     </button>
                     <p className="text-center text-[10px] text-[#444] uppercase font-bold tracking-widest mt-6">
                       By registering, you agree to the FNF Terms of Use and Privacy Policy.
