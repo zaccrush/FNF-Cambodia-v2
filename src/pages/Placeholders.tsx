@@ -19,9 +19,6 @@ const PageContainer = ({ title, description }: { title: string, description: str
   );
 };
 
-// HTML Sitemap
-export const Sitemap = () => <PageContainer title="HTML Sitemap" description="Complete flat architectural index of all FNF Cambodia pages to assist your navigation and search crawler bot flow." />;
-
 // 3. Kun Khmer Fighters (/fighters)
 export const MMAFighters = () => <PageContainer title="MMA Fighters" description="Global mixed martial arts contenders competing under the FNF banner. Experience a diverse range of disciplines meeting in the cage." />;
 

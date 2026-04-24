@@ -11,9 +11,9 @@ import Fighters from "./pages/Fighters";
 import Gyms from "./pages/Gyms";
 import Media from "./pages/Media";
 import Register from "./pages/Register";
+import Sitemap from "./pages/Sitemap";
 import { 
   MMAFighters,
-  Sitemap,
   Contact, 
   PrivacyPolicy, TermsOfUse 
 } from "./pages/Placeholders";
