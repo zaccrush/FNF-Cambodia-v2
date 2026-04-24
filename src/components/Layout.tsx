@@ -1,21 +1,30 @@
 import React from 'react';
-import Logo from '../assets/logo.png';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Navbar from './Navbar';
+import MobileMenu from './MobileMenu';
+import Footer from './Footer';
+import Animation from './Animation';
+import LanguageSwitcher from './LanguageSwitcher';
+import logoImg from '../assets/FNF-LOGO-White.png';
 
-const Layout = ({ children }) => {
+const Layout = () => {
     return (
-        <div>
-            <header>
-                <nav>
-                    <img src={Logo} alt="Logo" />
-                    {/* Other Navbar items here */}
-                </nav>
-            </header>
-            <main>{children}</main>
-            <footer>
-                <img src={Logo} alt="Logo" />
-                {/* Other Footer items here */}
-            </footer>
-        </div>
+        <Router>
+            <div className="layout">
+                <Navbar />
+                <MobileMenu />
+                <Animation />
+                <div className="content">
+                    <Switch>
+                        <Route path="/" exact> {/* main route handling */} </Route>
+                        {/* Add other routes as needed */}
+                    </Switch>
+                </div>
+                <img src={logoImg} alt="FNF Logo" />
+                <LanguageSwitcher />
+                <Footer />
+            </div>
+        </Router>
     );
 };
 
