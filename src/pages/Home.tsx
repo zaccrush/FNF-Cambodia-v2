@@ -1,4 +1,4 @@
-import { Play, ArrowRight, Star, Trophy, Users, Shield, Handshake, UserPlus, ChevronRight, MessageSquareQuote } from "lucide-react";
+import { Play, ArrowRight, Star, Trophy, Users, Shield, Handshake, UserPlus, ChevronRight } from "lucide-react";
 import { useOutletContext, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { fighters } from "../data/fighters";
@@ -20,23 +20,7 @@ export default function Home() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToManifesto = () => {
-    const section = document.getElementById('manifesto');
-    if (section) {
-      const offset = 80;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = section.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
-    }
-  };
   
-  // Use real fighters for the main event showcase
   const redFighter = fighters['prom-samnang'];
   const blueFighter = fighters['keo-rumchong'];
 
@@ -49,7 +33,7 @@ export default function Home() {
   return (
     <>
       {/* HERO SECTION - HIGH OCTANE */}
-      <section className="relative pt-40 pb-12 sm:pt-56 sm:pb-16 min-h-[100vh] flex flex-col justify-start overflow-hidden bg-brand-dark">
+      <section className="relative pt-16 pb-12 sm:pt-24 sm:pb-16 min-h-[80vh] flex flex-col justify-start overflow-hidden bg-brand-dark">
         {/* Dynamic Background Image */}
         <motion.div 
           initial={{ opacity: 0, scale: 1.05 }}
@@ -81,15 +65,17 @@ export default function Home() {
               >
                 {/* Live broadcast badge removed per request */}
                 
+                <div className="mb-4 md:mb-8" />
                 <h1 className="font-display font-medium tracking-tighter text-balance mb-6 uppercase leading-[0.9] text-white relative">
                   {language === "EN" ? (
                     <span className="block text-5xl xs:text-6xl sm:text-7xl md:text-8xl drop-shadow-2xl relative z-10">
-                      Feel the <span className="text-brand-gold italic">Pulse</span> of Phnom Penh
+                      Friday Night Fights <br />
+                      <span className="text-brand-gold italic">Phnom Penh</span>
                     </span>
                   ) : (
                     <span className="block text-4xl xs:text-5xl sm:text-6xl md:text-7xl leading-tight drop-shadow-2xl relative z-10">
-                      {t.home.heroTitle.split(':')[0]}៖ <br className="hidden md:block" />
-                      <span className="text-brand-gold italic">{t.home.heroTitle.split(':')[1]}</span>
+                      កម្មវិធីប្រដាល់ <br />
+                      <span className="text-brand-gold italic">រាត្រីថ្ងៃសុក្រ ភ្នំពេញ</span>
                     </span>
                   )}
                 </h1>
@@ -454,25 +440,6 @@ export default function Home() {
         </Link>
       </div>
 
-      {/* Manifesto Button - Positioned beneath header */}
-      <motion.button
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 1, duration: 0.8, type: "spring" }}
-        onClick={scrollToManifesto}
-        className="fixed right-6 top-24 sm:right-10 sm:top-28 z-[100] flex items-center gap-3 bg-[#10b981] text-white px-6 py-4 rounded-full font-bold uppercase tracking-widest text-[11px] shadow-[0_0_40px_rgba(16,185,129,0.5)] hover:bg-[#059669] hover:scale-105 active:scale-95 transition-all group border border-white/20"
-      >
-        <svg 
-          viewBox="0 0 24 24" 
-          width="20" 
-          height="20" 
-          fill="currentColor" 
-          className="group-hover:rotate-12 transition-transform duration-300"
-        >
-          <path d="M12 1L14.8 8.4L22 7.9L17.6 13.5L19.8 20.6L12 17.5L4.2 20.6L6.4 13.5L2 7.9L9.2 8.4L12 1Z" />
-        </svg>
-        <span className="hidden sm:inline">{language === 'EN' ? 'Message to Fighters' : 'សារជូនកីឡាករ'}</span>
-      </motion.button>
     </>
   );
 }

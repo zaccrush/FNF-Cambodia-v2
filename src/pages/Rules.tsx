@@ -55,7 +55,7 @@ export default function Rules() {
   ];
 
   return (
-    <div className="pt-24 pb-24 bg-brand-dark min-h-screen">
+    <div className="pt-32 sm:pt-40 pb-24 bg-brand-dark min-h-screen">
       {/* Header section with Vantablack aesthetic */}
       <section className="relative py-20 border-b border-white/5 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#1a1a1a] via-brand-dark to-brand-dark opacity-50" />

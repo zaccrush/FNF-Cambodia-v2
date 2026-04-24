@@ -53,7 +53,7 @@ export default function Register() {
 
   if (isSubmitted) {
     return (
-      <div className="pt-32 pb-24 min-h-[80vh] flex items-center justify-center">
+      <div className="pt-32 sm:pt-40 pb-24 min-h-[80vh] flex items-center justify-center">
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -80,7 +80,7 @@ export default function Register() {
   }
 
   return (
-    <div className="pt-32 pb-24 min-h-screen bg-brand-dark">
+    <div className="pt-32 sm:pt-40 pb-24 min-h-screen bg-brand-dark">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         <header className="max-w-3xl mb-16 text-center mx-auto">
           <motion.div

@@ -11,7 +11,7 @@ export default function FAQ() {
   const urlLang = language === "KH" ? "km" : "en";
 
   return (
-    <div className="pt-24 pb-24 bg-brand-dark min-h-screen">
+    <div className="pt-32 sm:pt-40 pb-24 bg-brand-dark min-h-screen">
       <section className="relative py-20 border-b border-white/5 overflow-hidden">
         <div className="max-w-4xl mx-auto px-8 relative z-10 text-center">
             <div className="w-16 h-16 bg-[#272727] rounded-2xl flex items-center justify-center mb-8 border border-white/10 mx-auto rotate-12">

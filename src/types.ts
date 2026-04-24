@@ -34,6 +34,13 @@ export interface Fighter {
   bio: string;
   image: string;
   history: Fight[];
+  socials?: {
+    instagram?: string;
+    facebook?: string;
+    tiktok?: string;
+    twitter?: string;
+    youtube?: string;
+  };
 }
 
 export interface Gym {

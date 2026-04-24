@@ -16,9 +16,9 @@ export default function About() {
   ];
 
   return (
-    <div className="pt-24 pb-24 bg-brand-dark min-h-screen">
+    <div className="pt-32 sm:pt-40 pb-24 bg-brand-dark min-h-screen">
       {/* Editorial Style Hero */}
-      <section className="relative h-[60vh] flex items-center overflow-hidden border-b border-white/5">
+      <section className="relative min-h-[50vh] py-20 flex items-center overflow-hidden border-b border-white/5">
         <div className="absolute inset-0 bg-[#0a0a0a]">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#1a1a1a] via-transparent to-transparent opacity-40" />
         </div>

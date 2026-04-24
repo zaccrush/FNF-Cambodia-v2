@@ -42,7 +42,7 @@ export default function Fighters() {
   }, [search, sortBy]);
 
   return (
-    <div className="pt-32 pb-24 min-h-screen bg-brand-dark">
+    <div className="pt-32 sm:pt-40 pb-24 min-h-screen bg-brand-dark">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         {/* HEADER SECTION */}
         <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">

@@ -2,10 +2,21 @@
 import { useParams, Link, useOutletContext } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { fighters } from '../data/fighters';
-import { Play, Trophy, Calendar, MapPin, Ruler, Weight, User, ChevronRight, ArrowLeft, Scale, X, ArrowRight, ArrowUp } from 'lucide-react';
+import { Play, Trophy, Calendar, MapPin, Ruler, Weight, User, ChevronRight, ArrowLeft, Scale, X, ArrowRight, ArrowUp, Facebook, Instagram, Twitter, Share2, Youtube } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { translations, Language } from '../data/translations';
 import { LazyImage } from '../components/LazyImage';
+
+const TikTokIcon = ({ size = 20 }: { size?: number }) => (
+  <svg 
+    width={size} 
+    height={size} 
+    viewBox="0 0 24 24" 
+    fill="currentColor"
+  >
+    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.86-.6-4.13-1.31-.12-.07-.26-.18-.33-.15-.453 1.11-.29 2.506.402 3.412.316.417.74.757 1.218 1.002.404.207.854.341 1.312.395v4.11c-.5-.04-1.01-.1-1.51-.22-1.39-.33-2.61-1.2-3.41-2.39-.12-.17-.26-.41-.44-.33-.04.09-.03.21-.03.31v6.98c-.01 1.83-.56 3.61-1.61 5.1-1.2 1.71-3.08 2.92-5.12 3.32-1.42.28-2.92.17-4.29-.31-1.74-.61-3.23-1.87-4.14-3.5C.13 18.06-.11 16.32.05 14.59c.2-2.18 1.22-4.26 2.87-5.71 1.51-1.33 3.49-2.09 5.51-2.12 1.28-.02 2.56.2 3.73.74.13.06.29.18.38.11.08-.1.05-.26.05-.38V.02z" />
+  </svg>
+);
 
 export default function FighterProfile() {
   const { id } = useParams();
@@ -53,7 +64,7 @@ export default function FighterProfile() {
   }
 
   return (
-    <div className="pt-24 pb-24 bg-brand-dark min-h-screen">
+    <div className="pt-32 sm:pt-40 pb-24 bg-brand-dark min-h-screen">
       {/* Hero Section */}
       <section className="relative overflow-hidden border-b border-white/5">
         <div className="absolute inset-0 z-0">
@@ -163,6 +174,72 @@ export default function FighterProfile() {
             <p className="text-[#888] leading-relaxed font-medium">
               {fighter.bio}
             </p>
+          </section>
+
+          <section>
+            <h3 className="text-sm font-bold text-brand-gold uppercase tracking-[0.2em] mb-6 flex items-center gap-3">
+              <span className="w-8 h-[1px] bg-brand-gold/30"></span> Digital Presence
+            </h3>
+            
+            <div className="flex flex-wrap gap-4 mb-8">
+              {fighter.socials ? (
+                <>
+                  {fighter.socials.instagram && (
+                    <a href={fighter.socials.instagram} target="_blank" rel="noreferrer" className="w-12 h-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-white hover:text-brand-gold hover:border-brand-gold/30 hover:scale-110 active:scale-95 transition-all">
+                      <Instagram size={20} />
+                    </a>
+                  )}
+                  {fighter.socials.facebook && (
+                    <a href={fighter.socials.facebook} target="_blank" rel="noreferrer" className="w-12 h-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-white hover:text-brand-gold hover:border-brand-gold/30 hover:scale-110 active:scale-95 transition-all">
+                      <Facebook size={20} />
+                    </a>
+                  )}
+                  {fighter.socials.tiktok && (
+                    <a href={fighter.socials.tiktok} target="_blank" rel="noreferrer" className="w-12 h-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-white hover:text-brand-gold hover:border-brand-gold/30 hover:scale-110 active:scale-95 transition-all">
+                      <TikTokIcon size={20} />
+                    </a>
+                  )}
+                  {fighter.socials.twitter && (
+                    <a href={fighter.socials.twitter} target="_blank" rel="noreferrer" className="w-12 h-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-white hover:text-brand-gold hover:border-brand-gold/30 hover:scale-110 active:scale-95 transition-all">
+                      <Twitter size={20} />
+                    </a>
+                  )}
+                  {fighter.socials.youtube && (
+                    <a href={fighter.socials.youtube} target="_blank" rel="noreferrer" className="w-12 h-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-white hover:text-brand-gold hover:border-brand-gold/30 hover:scale-110 active:scale-95 transition-all">
+                      <Youtube size={20} />
+                    </a>
+                  )}
+                </>
+              ) : (
+                <div className="w-full p-6 rounded-2xl bg-white/5 border border-dashed border-white/10 text-center">
+                  <p className="text-[10px] text-[#555] uppercase tracking-widest font-bold mb-3">No personal socials yet</p>
+                  <p className="text-xs text-[#888] mb-4">Follow FNF Official for updates on {fighter.name}</p>
+                  <div className="flex justify-center gap-3">
+                    <a href="https://facebook.com/fridaynightfights" className="text-[#555] hover:text-brand-gold transition-colors"><Facebook size={16} /></a>
+                    <a href="#" className="text-[#555] hover:text-brand-gold transition-colors"><Instagram size={16} /></a>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <button 
+              onClick={() => {
+                if (navigator.share) {
+                  navigator.share({
+                    title: `${fighter.name} | FNF Roster`,
+                    text: `Check out ${fighter.name}'s professional record at Friday Night Fights.`,
+                    url: window.location.href,
+                  });
+                } else {
+                  navigator.clipboard.writeText(window.location.href);
+                  alert('Profile link copied to clipboard!');
+                }
+              }}
+              className="w-full py-4 bg-white/5 border border-white/5 rounded-2xl flex items-center justify-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-[#888] hover:text-brand-gold hover:bg-white/10 active:scale-[0.98] transition-all"
+            >
+              <Share2 size={16} />
+              Share Profile
+            </button>
           </section>
 
           <section>

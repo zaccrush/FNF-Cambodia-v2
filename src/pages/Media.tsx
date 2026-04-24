@@ -75,7 +75,7 @@ export default function Media() {
   ];
 
   return (
-    <div className="pt-24 pb-24 bg-brand-dark min-h-screen">
+    <div className="pt-32 sm:pt-40 pb-24 bg-brand-dark min-h-screen">
       {/* Header section */}
       <section className="py-20 border-b border-white/5 bg-[#0a0a0a]">
         <div className="max-w-7xl mx-auto px-8">

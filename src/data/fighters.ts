@@ -46,7 +46,11 @@ export const fighters: Record<string, Fighter> = {
     weightClass: '60 kg',
     bio: "Pich Sambath, the 'Steel-Horn Wild Buffalo', is a dynamic force in Kun Khmer known for его fearless fighting style and excellent stamina. He achieved Class A status in record time and holds multiple belts including the WCK title won in California.",
     image: 'https://mlyhvn7evw8p.i.optimole.com/cb:ETmX.59fc0/w:1902/h:360/q:mauto/g:sm/f:best/https://mykunkhmer.com/wp-content/uploads/2023/12/Pich-Sambath.jpg',
-    history: []
+    history: [],
+    socials: {
+      facebook: 'https://facebook.com/pich.sambath.official',
+      tiktok: 'https://tiktok.com/@pichsambath'
+    }
   },
   'prom-samnang': {
     id: 'prom-samnang',
@@ -62,7 +66,12 @@ export const fighters: Record<string, Fighter> = {
     weightClass: '81 kg',
     bio: "Prom Samnang is the most revered figure in Cambodian fighting. A 2023 SEA Games Gold medalist, he balances his career as an elite fighter and a skilled barber. He has defeated international champions on the Thai Fight stage.",
     image: 'https://mlyhvn7evw8p.i.optimole.com/cb:ETmX.59fc0/w:1902/h:360/q:mauto/g:sm/f:best/https://mykunkhmer.com/wp-content/uploads/2023/12/promsamnang.jpg',
-    history: []
+    history: [],
+    socials: {
+      facebook: 'https://facebook.com/prom.samnang',
+      instagram: 'https://instagram.com/promsamnang',
+      youtube: 'https://youtube.com/@promsamnang'
+    }
   },
   'roeung-sophorn': {
     id: 'roeung-sophorn',
